@@ -9,13 +9,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.io.File;
+
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class TestPracticeForm {
-
 
 
     @Test
@@ -27,35 +27,22 @@ public class TestPracticeForm {
         $("#userEmail").setValue("ivanov@gmail.com");
         $("#genterWrapper").$(byText("Male")).click();
         $("#userNumber").setValue("7999999999");
-
         $("#dateOfBirthInput").click();
         $(".react-datepicker__month-select").click();
         $(".react-datepicker__month-select").selectOption("March");
         $(".react-datepicker__year-select").selectOption("1998");
         $x("//div[contains(text(),'25')]").click();
-
         $("#subjectsInput").setValue("English").pressEnter();
         $x("//label[contains(text(),'Sport')]").click();
-        $("#uploadPicture").uploadFile(new File("photo.jpg"));
-
+        $("#uploadPicture").uploadFromClasspath("file.txt");
         $("#submit").scrollTo();
         $("#currentAddress").setValue("Moscow");
         $("#react-select-3-input").setValue("Ha").pressEnter();
         $("#react-select-4-input").setValue("Pa").pressEnter();
-
         $("#submit").click();
-
         $("#example-modal-sizes-title-lg").shouldBe(visible);
-        $(".table-responsive").shouldHave(text("Alex"));
-        $(".table-responsive").shouldHave(text("Ivanov"));
-        $(".table-responsive").shouldHave(text("ivanov@gmail.com"));
-        $(".table-responsive").shouldHave(text("Male"));
-        $(".table-responsive").shouldHave(text("7999999999"));
-        $(".table-responsive").shouldHave(text("25 March,1998"));
-        $(".table-responsive").shouldHave(text("Moscow"));
-        $(".table-responsive").shouldHave(text("English"));
-        $(".table-responsive").shouldHave(text("Sports"));
-        $(".table-responsive").shouldHave(text("photo.jpg"));
-        $(".table-responsive").shouldHave(text("Haryana Panipat"));
+        $(".table-responsive").shouldHave(text("Alex"), text("Ivanov"), text("ivanov@gmail.com"),
+                text("Male"), text("7999999999"), text("25 March,1998"), text("Moscow"), text("English"),
+                text("Sports"), text("file.txt"), text("Haryana Panipat"));
     }
 }
