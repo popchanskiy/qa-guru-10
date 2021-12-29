@@ -46,9 +46,9 @@ public class ExploringSelenideRepo {
     }
 
 
-    void searchRepo(String repoName) {
+    void searchRepo(String repoNameToFind) {
         $("[data-test-selector=nav-search-input]")
-                .setValue(repoName)
+                .setValue(repoNameToFind)
                 .pressEnter();
     }
 
