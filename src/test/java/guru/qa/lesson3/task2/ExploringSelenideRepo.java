@@ -73,7 +73,7 @@ public class ExploringSelenideRepo {
     }
 
     void textPresentingInsidePage(String text) {
-        $(".markdown-body").shouldHave(text("Using JUnit5 extend test class"));
+        $(".markdown-body").shouldHave(text(text));
     }
 }
 
