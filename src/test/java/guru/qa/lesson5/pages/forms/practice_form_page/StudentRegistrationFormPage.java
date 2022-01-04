@@ -3,26 +3,32 @@ package guru.qa.lesson5.pages.forms.practice_form_page;
 import com.codeborne.selenide.SelenideElement;
 import guru.qa.lesson5.pages.BasePage;
 import guru.qa.lesson5.pages.components.DataPickerComponent;
-import org.openqa.selenium.WebElement;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selenide.open;
 
 public class StudentRegistrationFormPage extends BasePage {
     private final SelenideElement firstNameField = $("#firstName");
     private final SelenideElement lastNameField = $("#lastName");
     private final SelenideElement emailField = $("#userEmail");
-    private final SelenideElement genderField = $("#genterWrapper");
+    private final SelenideElement genderRadioBtn = $("#genterWrapper");
     private final SelenideElement mobileField = $("#userNumber");
-    private final SelenideElement dateOfBirthField = $("#dateOfBirthInput");
-    private final SelenideElement subjectsField = $("#subjectsInput").setValue("English").pressEnter();
-    private final SelenideElement hobbies = $x("//label[contains(text(),'Sport')]");
-    private final WebElement pictureUploadField = $("#uploadPicture");
+    //private final SelenideElement dateOfBirthField = $("#dateOfBirthInput");
+    private final SelenideElement subjectsField = $("#subjectsInput");
+    //private final SelenideElement hobbiesRadioBtn = $(byText(String.valueOf("")));
+    private final SelenideElement pictureUploadField = $("#uploadPicture");
     private final SelenideElement addressField = $("#currentAddress");
+    private final SelenideElement stateSelect = $("#react-select-3-input");
+    private final SelenideElement citySelect = $("#react-select-4-input");
+    private final SelenideElement submitBtn= $("#submit");
 
-    public SelenideElement getDateOfBirthField() {
-        return dateOfBirthField;
+
+    public StudentRegistrationFormPage openPage() {
+        open("/automation-practice-form");
+        $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
+        return this;
     }
 
     public StudentRegistrationFormPage setFirstName(String value) {
@@ -41,7 +47,7 @@ public class StudentRegistrationFormPage extends BasePage {
     }
 
     public StudentRegistrationFormPage setGender(String gender) {
-        genderField.$(byText(gender)).click();
+        genderRadioBtn.$(byText(gender)).click();
         return this;
     }
 
@@ -55,5 +61,43 @@ public class StudentRegistrationFormPage extends BasePage {
         return this;
     }
 
+    public StudentRegistrationFormPage setSubject(String subject) {
+        subjectsField
+                .setValue(subject)
+                .pressEnter();
+        return this;
+    }
+
+    public StudentRegistrationFormPage setHobbies(String hobbies) {
+        $(byText(String.valueOf(hobbies))).click();
+        return this;
+    }
+
+    public StudentRegistrationFormPage uploadPicture(String filePath) {
+        pictureUploadField.uploadFromClasspath(filePath);
+        return this;
+    }
+
+    public StudentRegistrationFormPage setAddress(String address) {
+        addressField.setValue(address);
+        return this;
+    }
+
+    public StudentRegistrationFormPage selectState(String state) {
+        stateSelect.setValue(String.valueOf(state))
+                .pressEnter();
+        return this;
+    }
+
+    public StudentRegistrationFormPage selectCity(String city) {
+        citySelect.setValue(String.valueOf(city))
+                .pressEnter();
+        return this;
+    }
+    public void submitBtnClick() {
+        submitBtn
+                .scrollIntoView(true)
+                .click();
+    }
 
 }

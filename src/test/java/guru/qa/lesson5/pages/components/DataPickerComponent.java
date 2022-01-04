@@ -8,7 +8,7 @@ public class DataPickerComponent {
 
     private boolean isCalendarActive() {
         return $("#dateOfBirthInput.form-control.react-datepicker-ignore-onclickoutside")
-                .isEnabled();
+                .isDisplayed();
     }
 
     private void activateCalendar() {
@@ -18,14 +18,19 @@ public class DataPickerComponent {
     }
 
     public void setDate(String day, String month, String year) {
-        setDay(day);
-        setMonth(month);
         setYear(year);
+        setMonth(month);
+        setDay(day);
     }
 
     public DataPickerComponent setDay(String day) {
+        String zeroesAmount = "00";
+        if(Integer.valueOf(day).intValue()/10>=1){ //
+            zeroesAmount="0";
+        }
         activateCalendar();
-        String dayLocator = format(".react-datepicker__day--0%s:not(.react-datepicker__day--outside-month)", day);
+
+        String dayLocator = format(".react-datepicker__day--"+ zeroesAmount +"%s:not(.react-datepicker__day--outside-month)", day);
         $(dayLocator).click();
         return this;
     }
