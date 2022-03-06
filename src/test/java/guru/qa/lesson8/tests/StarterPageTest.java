@@ -2,11 +2,12 @@ package guru.qa.lesson8.tests;
 
 import guru.qa.lesson8.pages.starter_page.StarterPage;
 import guru.qa.lesson8.pages.starter_page.page_components.ResultTable;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-
+@Disabled("disabled cause low speed test")
 public class StarterPageTest {
     StarterPage starterPage = new StarterPage();
     ResultTable table = new ResultTable();
